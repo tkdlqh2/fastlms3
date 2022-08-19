@@ -4,7 +4,7 @@ import com.zerobase.fastlms.dto.TakeCourseDto;
 import com.zerobase.fastlms.entity.TakeCourse;
 import com.zerobase.fastlms.entity.TakeCourseCode;
 import com.zerobase.fastlms.mapper.TakeCourseMapper;
-import repository.TakeCourseRepository;
+import com.zerobase.fastlms.repository.TakeCourseRepository;
 import com.zerobase.fastlms.model.ServiceResult;
 import com.zerobase.fastlms.model.TakeCourseParam;
 import lombok.RequiredArgsConstructor;

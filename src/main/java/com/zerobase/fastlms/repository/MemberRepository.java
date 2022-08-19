@@ -1,4 +1,4 @@
-package repository;
+package com.zerobase.fastlms.repository;
 
 import com.zerobase.fastlms.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

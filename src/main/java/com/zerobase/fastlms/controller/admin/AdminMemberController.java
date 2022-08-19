@@ -1,6 +1,7 @@
-package com.zerobase.fastlms.controller;
+package com.zerobase.fastlms.controller.admin;
 
 
+import com.zerobase.fastlms.controller.BaseController;
 import com.zerobase.fastlms.dto.MemberDto;
 import com.zerobase.fastlms.model.MemberParam;
 import com.zerobase.fastlms.model.MemberInput;
@@ -54,7 +55,7 @@ public class AdminMemberController extends BaseController {
     public String status(Model model, MemberInput parameter) {
     
         
-        boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getUserStatus());
+        boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getMemberStatus());
         
         return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
     }

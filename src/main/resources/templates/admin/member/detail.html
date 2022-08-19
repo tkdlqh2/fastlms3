@@ -63,7 +63,7 @@
                     <th>회원 상태</th>
                     <td>
                         <p>
-                            현재상태: <span th:text="${member.userStatus}"></span>
+                            현재상태: <span th:text="${member.memberStatus.getDescription()}"></span>
                         </p>
                         <div>
                             <form method="post" action="/admin/member/status.do">

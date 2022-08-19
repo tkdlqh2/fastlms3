@@ -20,7 +20,6 @@ import java.security.Principal;
 public class ApiCourseController extends BaseController {
     
     private final CourseService courseService;
-    private final CategoryService categoryService;
     
     @PostMapping("/api/course/req.api")
     public ResponseEntity<?> courseReq(Model model

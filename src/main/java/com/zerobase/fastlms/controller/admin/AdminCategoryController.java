@@ -1,4 +1,4 @@
-package com.zerobase.fastlms.controller;
+package com.zerobase.fastlms.controller.admin;
 
 
 import com.zerobase.fastlms.dto.CategoryDto;

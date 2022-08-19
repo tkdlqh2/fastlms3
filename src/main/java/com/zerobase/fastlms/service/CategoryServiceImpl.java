@@ -4,7 +4,7 @@ import com.zerobase.fastlms.dto.CategoryDto;
 import com.zerobase.fastlms.entity.Category;
 import com.zerobase.fastlms.mapper.CategoryMapper;
 import com.zerobase.fastlms.model.CategoryInput;
-import repository.CategoryRepository;
+import com.zerobase.fastlms.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

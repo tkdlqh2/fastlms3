@@ -1,17 +1,17 @@
 package com.zerobase.fastlms.service;
 
-import com.zerobase.fastlms.dto.MemberDto;
-import com.zerobase.fastlms.mapper.MemberMapper;
-import com.zerobase.fastlms.model.MemberParam;
 import com.zerobase.fastlms.components.MailComponents;
-import com.zerobase.fastlms.model.ServiceResult;
+import com.zerobase.fastlms.dto.MemberDto;
 import com.zerobase.fastlms.entity.Member;
-import com.zerobase.fastlms.entity.MemberCode;
 import com.zerobase.fastlms.exception.MemberNotEmailAuthException;
 import com.zerobase.fastlms.exception.MemberStopUserException;
+import com.zerobase.fastlms.mapper.MemberMapper;
 import com.zerobase.fastlms.model.AddingMemberInput;
+import com.zerobase.fastlms.model.MemberParam;
 import com.zerobase.fastlms.model.ResetPasswordInput;
-import repository.MemberRepository;
+import com.zerobase.fastlms.model.ServiceResult;
+import com.zerobase.fastlms.repository.MemberRepository;
+import com.zerobase.fastlms.type.MemberStatus;
 import com.zerobase.fastlms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
                 .regDt(LocalDateTime.now())
                 .emailAuthYn(false)
                 .emailAuthKey(uuid)
-                .userStatus(Member.MEMBER_STATUS_REQ)
+                .memberStatus(MemberStatus.REQ)
                 .build();
         memberRepository.save(member);
         
@@ -88,7 +88,7 @@ public class MemberServiceImpl implements MemberService {
             return false;
         }
         
-        member.setUserStatus(Member.MEMBER_STATUS_ING);
+        member.setMemberStatus(MemberStatus.ING);
         member.setEmailAuthYn(true);
         member.setEmailAuthDt(LocalDateTime.now());
         memberRepository.save(member);
@@ -156,7 +156,7 @@ public class MemberServiceImpl implements MemberService {
     }
     
     @Override
-    public boolean updateStatus(String userId, String userStatus) {
+    public boolean updateStatus(String userId, MemberStatus memberStatus) {
     
         Optional<Member> optionalMember = memberRepository.findById(userId);
         if (!optionalMember.isPresent()) {
@@ -165,7 +165,7 @@ public class MemberServiceImpl implements MemberService {
     
         Member member = optionalMember.get();
         
-        member.setUserStatus(userStatus);
+        member.setMemberStatus(memberStatus);
         memberRepository.save(member);
         
         return true;
@@ -258,7 +258,7 @@ public class MemberServiceImpl implements MemberService {
         member.setEmailAuthKey("");
         member.setResetPasswordKey("");
         member.setResetPasswordLimitDt(null);
-        member.setUserStatus(MemberCode.MEMBER_STATUS_WITHDRAW);
+        member.setMemberStatus(MemberStatus.WITHDRAW);
         member.setZipcode("");
         member.setAddr("");
         member.setAddrDetail("");
@@ -277,15 +277,15 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = optionalMember.get();
         
-        if (Member.MEMBER_STATUS_REQ.equals(member.getUserStatus())) {
+        if (MemberStatus.REQ.equals(member.getMemberStatus())) {
             throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인을 해주세요.");
         }
         
-        if (Member.MEMBER_STATUS_STOP.equals(member.getUserStatus())) {
+        if (MemberStatus.STOP.equals(member.getMemberStatus())) {
             throw new MemberStopUserException("정지된 회원 입니다.");
         }
     
-        if (Member.MEMBER_STATUS_WITHDRAW.equals(member.getUserStatus())) {
+        if (MemberStatus.WITHDRAW.equals(member.getMemberStatus())) {
             throw new MemberStopUserException("탈퇴된 회원 입니다.");
         }
 

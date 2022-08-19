@@ -1,6 +1,7 @@
-package com.zerobase.fastlms.controller;
+package com.zerobase.fastlms.controller.normal;
 
 
+import com.zerobase.fastlms.controller.BaseController;
 import com.zerobase.fastlms.dto.CategoryDto;
 import com.zerobase.fastlms.service.CategoryService;
 import com.zerobase.fastlms.dto.CourseDto;
