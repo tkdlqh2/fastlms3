@@ -17,8 +17,35 @@
             padding: 100px;
         }
 
-        .inline-div {
-            display: inline-block;
+        .list .buttons {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .list  .buttons a,.list  .buttons button {
+            border-width: 0;
+            background-color: transparent;
+            text-decoration: underline;
+            font-size: 14px;
+            line-height: 20px;
+            height: 20px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .list .buttons .total-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .pager {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pager a.on {
+            font-weight: bold;
+            color: red;
         }
     </style>
 
@@ -26,97 +53,85 @@
     <script>
         $(document).ready(function() {
 
-            $('form[name=deleteForm]').on('submit', function() {
-                if (!confirm(' 카테고리를 삭제하시겠습니까? ')) {
-                    return false;
-                }
+            $('#selectAll').on('click', function() {
+
+                var checked = $(this).is(':checked');
+
+
+                $('#dataList input[type=checkbox]').each(function(k, v) {
+                    $(this).prop('checked', checked);
+                });
+
+
             });
 
+            $('#deleteButton').on('click', function() {
 
-            $('button.update-button').on('click', function() {
-
-                if (!confirm('카테고리를 수정하시겠습니까?')) {
+                var $checked = $('#dataList input[type=checkbox]:checked');
+                if ($checked.length < 1) {
+                    alert(' 삭제할 데이터를 선택해 주세요. ');
                     return false;
                 }
 
-                var $this = $(this);
-                var $tr = $this.closest('tr');
+                if (!confirm(' 선택한 데이터를 삭제하시겠습니까? ')) {
+                    return false;
+                }
 
-                var id = $tr.find('input[name=id]').val();
-                var categoryName = $tr.find('input[name=categoryName]').val();
-                var sortValue = $tr.find('input[name=sortValue]').val();
-                var usingYn = $tr.find('input[type=checkbox]')[0].checked;
+                var idList = [];
+                $.each($checked, function(k, v) {
+                    idList.push($(this).val());
+                });
 
-                $updateForm = $('form[name=updateForm]');
-                $updateForm.find('input[name=id]').val( id );
-                $updateForm.find('input[name=categoryName]').val( categoryName );
-                $updateForm.find('input[name=sortValue]').val( sortValue );
-                $updateForm.find('input[name=usingYn]').val( usingYn );
-                $updateForm.submit();
+                console.log(idList);
+                console.log(idList.join(','));
+
+                var $deleteForm = $('form[name=deleteForm]');
+                $deleteForm.find('input[name=idList]').val( idList.join(',') );
+                $deleteForm.submit();
+
             });
+
 
         });
     </script>
 </head>
 <body>
     <div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
-    <h1>카테고리 관리</h1>
+    <h1>배너 관리</h1>
 
 
 <div class="list">
 
-    <div>
-        <form method="post" action="/admin/category/add.do">
-            <input type="text" name="categoryName" required placeholder="카테고리명 입력"/>
-            <button type="submit">추가</button>
-        </form>
+    <div class="buttons">
+        <p class="total-count">전체 <span th:text="${totalCount}"></span>개</p>
+
+        <a href="/admin/banner/add.do"> 배너 등록 </a>
+        <button id="deleteButton" type="button"> 선택 삭제 </button>
     </div>
 
     <table>
         <thead>
         <tr>
-            <th> ID</th>
             <th>
-                카테고리명
+                <input id="selectAll" type="checkbox" />
             </th>
-            <th>
-                순서
-            </th>
-            <th>
-                사용여부
-            </th>
-            <th>
-                비고
-            </th>
+            <th>NO</th>
+            <th>배너명</th>
+            <th>이미지</th>
+            <th>등록일</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="dataList">
             <tr th:each="x : ${list}">
-                <td th:text="${x.id}">
-                    <input type="hidden" name="id" th:value="${x.id}"/>
-                    <p th:text="${x.id}">1</p>
+                <td><input type="checkbox" th:value="${x.id}"/></td>
+                <td th:text="${x.seq}"></td>
+                <td>
+                    <a th:href="'/admin/banner/edit.do?id='+${x.id}" ><span th:text="${x.name}"/></a>
                 </td>
                 <td>
-                    <input th:value="${x.categoryName}" type="text" name="categoryName"/>
+                    <img th:src="${x.imagePath}" width="300" height="300"/>
                 </td>
-                <td>
-                    <input th:value="${x.sortValue}" type="text" name="sortValue"/>
-                </td>
-                <td>
-                    <input th:checked="${x.usingYn}" type="checkbox" th:id="'usingYn_' + ${x.id}" th:name="'usingYn_' + ${x.id}" value="true"/>
-                    <label th:for="'usingYn_' + ${x.id}">사용</label>
-                </td>
-                <td>
-                    <div class="inline-div">
-                        <button class="update-button" type="button">수정</button>
-                    </div>
-                    <div class="inline-div">
-                        <form name="deleteForm" method="post" action="/admin/category/delete.do">
-                            <input type="hidden" name="id" th:value="${x.id}"/>
-                            <button type="submit">삭제</button>
-                        </form>
-                    </div>
-                </td>
+                <td th:text="${x.regDt}"></td>
             </tr>
             <tr th:if="${#lists.size(list) < 1}">
                 <td colspan="5" >
@@ -126,14 +141,14 @@
         </tbody>
     </table>
 
+    <div class="pager" th:utext="${pager}">
+    </div>
+
 </div>
 
 
-<form name="updateForm" method="post" action="/admin/category/update.do">
-    <input type="hidden" name="id"/>
-    <input type="hidden" name="categoryName"/>
-    <input type="hidden" name="sortValue"/>
-    <input type="hidden" name="usingYn" />
+<form name="deleteForm" method="post" action="/admin/banner/delete.do">
+    <input type="hidden" name="idList"/>
 </form>
 
 

@@ -1,7 +1,7 @@
 package com.zerobase.fastlms.mapper;
 
 import com.zerobase.fastlms.dto.CourseDto;
-import com.zerobase.fastlms.model.CourseParam;
+import com.zerobase.fastlms.model.course.CourseParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

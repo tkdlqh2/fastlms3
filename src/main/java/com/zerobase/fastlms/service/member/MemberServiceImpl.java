@@ -1,4 +1,4 @@
-package com.zerobase.fastlms.service;
+package com.zerobase.fastlms.service.member;
 
 import com.zerobase.fastlms.components.MailComponents;
 import com.zerobase.fastlms.dto.MemberDto;
@@ -6,9 +6,9 @@ import com.zerobase.fastlms.entity.Member;
 import com.zerobase.fastlms.exception.MemberNotEmailAuthException;
 import com.zerobase.fastlms.exception.MemberStopUserException;
 import com.zerobase.fastlms.mapper.MemberMapper;
-import com.zerobase.fastlms.model.AddingMemberInput;
-import com.zerobase.fastlms.model.MemberParam;
-import com.zerobase.fastlms.model.ResetPasswordInput;
+import com.zerobase.fastlms.model.member.MemberInput;
+import com.zerobase.fastlms.model.member.MemberParam;
+import com.zerobase.fastlms.model.member.ResetPasswordInput;
 import com.zerobase.fastlms.model.ServiceResult;
 import com.zerobase.fastlms.repository.MemberRepository;
 import com.zerobase.fastlms.type.MemberStatus;
@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
      * 회원 가입
      */
     @Override
-    public boolean register(AddingMemberInput parameter) {
+    public boolean register(MemberInput parameter) {
     
         Optional<Member> optionalMember = memberRepository.findById(parameter.getUserId());
         if (optionalMember.isPresent()) {
@@ -190,7 +190,7 @@ public class MemberServiceImpl implements MemberService {
     }
     
     @Override
-    public ServiceResult updateMember(AddingMemberInput parameter) {
+    public ServiceResult updateMember(MemberInput parameter) {
         
         String userId = parameter.getUserId();
     
@@ -212,7 +212,7 @@ public class MemberServiceImpl implements MemberService {
     }
     
     @Override
-    public ServiceResult updateMemberPassword(AddingMemberInput parameter) {
+    public ServiceResult updateMemberPassword(MemberInput parameter) {
     
         String userId = parameter.getUserId();
         

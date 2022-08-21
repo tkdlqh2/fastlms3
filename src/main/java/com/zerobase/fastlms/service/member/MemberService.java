@@ -1,9 +1,9 @@
-package com.zerobase.fastlms.service;
+package com.zerobase.fastlms.service.member;
 
 import com.zerobase.fastlms.dto.MemberDto;
-import com.zerobase.fastlms.model.AddingMemberInput;
-import com.zerobase.fastlms.model.MemberParam;
-import com.zerobase.fastlms.model.ResetPasswordInput;
+import com.zerobase.fastlms.model.member.MemberInput;
+import com.zerobase.fastlms.model.member.MemberParam;
+import com.zerobase.fastlms.model.member.ResetPasswordInput;
 import com.zerobase.fastlms.model.ServiceResult;
 import com.zerobase.fastlms.type.MemberStatus;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface MemberService extends UserDetailsService {
     
-    boolean register(AddingMemberInput parameter);
+    boolean register(MemberInput parameter);
     
     /**
      * uuid에 해당하는 계정을 활성화 함.
@@ -48,12 +48,12 @@ public interface MemberService extends UserDetailsService {
     /**
      * 회원정보 수정
      */
-    ServiceResult updateMember(AddingMemberInput parameter);
+    ServiceResult updateMember(MemberInput parameter);
     
     /**
      * 회원 정보 페이지내 비밀번호 변경 기능
      */
-    ServiceResult updateMemberPassword(AddingMemberInput parameter);
+    ServiceResult updateMemberPassword(MemberInput parameter);
     
     /**
      * 회원을 탈퇴시켜 주는 로직

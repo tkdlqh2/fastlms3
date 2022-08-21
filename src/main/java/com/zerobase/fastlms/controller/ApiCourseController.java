@@ -1,11 +1,10 @@
 package com.zerobase.fastlms.controller;
 
 
-import com.zerobase.fastlms.service.CategoryService;
 import com.zerobase.fastlms.model.ResponseResult;
 import com.zerobase.fastlms.model.ServiceResult;
-import com.zerobase.fastlms.model.TakeCourseInput;
-import com.zerobase.fastlms.service.CourseService;
+import com.zerobase.fastlms.model.course.TakeCourseInput;
+import com.zerobase.fastlms.service.course.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;

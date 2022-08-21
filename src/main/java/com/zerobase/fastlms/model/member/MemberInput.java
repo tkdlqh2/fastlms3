@@ -1,11 +1,11 @@
-package com.zerobase.fastlms.model;
+package com.zerobase.fastlms.model.member;
 
 import lombok.Data;
 import lombok.ToString;
 
 @ToString
 @Data
-public class AddingMemberInput {
+public class MemberInput {
     private String userId;
     private String userName;
     private String phone;

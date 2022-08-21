@@ -1,4 +1,4 @@
-package com.zerobase.fastlms.model;
+package com.zerobase.fastlms.model.category;
 
 
 import lombok.Data;

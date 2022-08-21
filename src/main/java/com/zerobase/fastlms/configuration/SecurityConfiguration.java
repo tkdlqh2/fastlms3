@@ -1,6 +1,6 @@
 package com.zerobase.fastlms.configuration;
 
-import com.zerobase.fastlms.service.MemberService;
+import com.zerobase.fastlms.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,8 +3,12 @@ package com.zerobase.fastlms.controller;
 import com.zerobase.fastlms.dto.MemberDto;
 import com.zerobase.fastlms.dto.TakeCourseDto;
 import com.zerobase.fastlms.model.*;
-import com.zerobase.fastlms.service.MemberService;
-import com.zerobase.fastlms.service.TakeCourseService;
+import com.zerobase.fastlms.model.course.TakeCourseInput;
+import com.zerobase.fastlms.model.member.MemberInput;
+import com.zerobase.fastlms.model.member.AdminMemberInput;
+import com.zerobase.fastlms.model.member.ResetPasswordInput;
+import com.zerobase.fastlms.service.member.MemberService;
+import com.zerobase.fastlms.service.course.TakeCourseService;
 import com.zerobase.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -101,7 +105,7 @@ public class BaseController {
 
         @PostMapping("/member/register")
         public String registerSubmit(Model model, HttpServletRequest request
-                , AddingMemberInput parameter) {
+                , MemberInput parameter) {
 
             boolean result = memberService.register(parameter);
             model.addAttribute("result", result);
@@ -141,7 +145,7 @@ public class BaseController {
 
         @PostMapping("/member/info")
         public String memberInfoSubmit(Model model
-                , AddingMemberInput parameter
+                , MemberInput parameter
                 , Principal principal) {
 
             String userId = principal.getName();
@@ -168,7 +172,7 @@ public class BaseController {
 
         @PostMapping("/member/password")
         public String memberPasswordSubmit(Model model
-                , AddingMemberInput parameter
+                , MemberInput parameter
                 , Principal principal) {
 
             String userId = principal.getName();
@@ -204,7 +208,7 @@ public class BaseController {
 
         @PostMapping("/member/withdraw")
         public String memberWithdrawSubmit(Model model
-                , MemberInput parameter
+                , AdminMemberInput parameter
                 , Principal principal) {
 
             String userId = principal.getName();

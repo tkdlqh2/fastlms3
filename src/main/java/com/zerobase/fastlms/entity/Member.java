@@ -35,6 +35,7 @@ public class Member {
     private LocalDateTime resetPasswordLimitDt;
     
     private boolean adminYn;
+    private LocalDateTime finalLoginDateTime;
 
     @Enumerated(EnumType.STRING)
     private MemberStatus memberStatus;//이용가능한상태, 정지상태

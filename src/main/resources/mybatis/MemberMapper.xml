@@ -58,7 +58,7 @@
             <include refid="selectListWhere"/>
     </select>
 
-    <select id="selectList" resultMap="com.zerobase.fastlms.dto.MemberDto">
+    <select id="selectList" resultMap="memberDtoResultMap">
         select *
         from member
         where 1 = 1

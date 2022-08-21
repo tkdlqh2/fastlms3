@@ -1,8 +1,8 @@
-package com.zerobase.fastlms.service;
+package com.zerobase.fastlms.service.course;
 
 import com.zerobase.fastlms.dto.TakeCourseDto;
 import com.zerobase.fastlms.model.ServiceResult;
-import com.zerobase.fastlms.model.TakeCourseParam;
+import com.zerobase.fastlms.model.course.TakeCourseParam;
 
 import java.util.List;
 

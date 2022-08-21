@@ -1,10 +1,10 @@
-package com.zerobase.fastlms.model;
+package com.zerobase.fastlms.model.member;
 
 import com.zerobase.fastlms.type.MemberStatus;
 import lombok.Data;
 
 @Data
-public class MemberInput {
+public class AdminMemberInput {
     String userId;
     MemberStatus memberStatus;
     String password;

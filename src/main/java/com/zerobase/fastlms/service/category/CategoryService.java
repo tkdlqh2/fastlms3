@@ -1,7 +1,7 @@
-package com.zerobase.fastlms.service;
+package com.zerobase.fastlms.service.category;
 
 import com.zerobase.fastlms.dto.CategoryDto;
-import com.zerobase.fastlms.model.CategoryInput;
+import com.zerobase.fastlms.model.category.CategoryInput;
 
 import java.util.List;
 

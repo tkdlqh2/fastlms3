@@ -3,9 +3,9 @@ package com.zerobase.fastlms.controller.admin;
 
 import com.zerobase.fastlms.controller.BaseController;
 import com.zerobase.fastlms.dto.MemberDto;
-import com.zerobase.fastlms.model.MemberParam;
-import com.zerobase.fastlms.model.MemberInput;
-import com.zerobase.fastlms.service.MemberService;
+import com.zerobase.fastlms.model.member.MemberParam;
+import com.zerobase.fastlms.model.member.AdminMemberInput;
+import com.zerobase.fastlms.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,13 +46,15 @@ public class AdminMemberController extends BaseController {
         parameter.init();
         
         MemberDto member = memberService.detail(parameter.getUserId());
+        System.out.println(member.getUserName());
+        System.out.println(member.getMemberStatus() == null);
         model.addAttribute("member", member);
        
         return "admin/member/detail";
     }
     
     @PostMapping("/admin/member/status.do")
-    public String status(Model model, MemberInput parameter) {
+    public String status(Model model, AdminMemberInput parameter) {
     
         
         boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getMemberStatus());
@@ -62,7 +64,7 @@ public class AdminMemberController extends BaseController {
     
     
     @PostMapping("/admin/member/password.do")
-    public String password(Model model, MemberInput parameter) {
+    public String password(Model model, AdminMemberInput parameter) {
         
         
         boolean result = memberService.updatePassword(parameter.getUserId(), parameter.getPassword());

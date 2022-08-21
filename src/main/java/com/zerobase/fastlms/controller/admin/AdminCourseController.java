@@ -2,11 +2,11 @@ package com.zerobase.fastlms.controller.admin;
 
 
 import com.zerobase.fastlms.controller.BaseController;
-import com.zerobase.fastlms.service.CategoryService;
+import com.zerobase.fastlms.service.category.CategoryService;
 import com.zerobase.fastlms.dto.CourseDto;
-import com.zerobase.fastlms.model.CourseInput;
-import com.zerobase.fastlms.model.CourseParam;
-import com.zerobase.fastlms.service.CourseService;
+import com.zerobase.fastlms.model.course.CourseInput;
+import com.zerobase.fastlms.model.course.CourseParam;
+import com.zerobase.fastlms.service.course.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
