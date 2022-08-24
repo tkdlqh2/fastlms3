@@ -79,15 +79,15 @@
                     <th>회원 상태</th>
                     <td>
                         <p>
-                            현재상태: <span th:text="${member.memberStatus}"></span>
+                            현재상태: <span th:text="${member.memberStatus.getDescription()}"></span>
                         </p>
                         <div>
                             <form method="post" action="/admin/member/status.do">
                                 <input th:value="${member.userId}" type="hidden" name="userId"/>
-                                <select name="userStatus">
+                                <select name="memberStatus">
                                     <option value="REQ">가입승인중</option>
                                     <option value="ING">정상이용중</option>
-                                    <option value="STOP">정지중</option>
+                                    <option value="STOP">정지</option>
                                 </select>
                                 <button type="submit">상태 변경</button>
                             </form>

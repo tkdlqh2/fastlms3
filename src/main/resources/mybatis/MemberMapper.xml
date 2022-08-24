@@ -4,6 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zerobase.fastlms.mapper.MemberMapper">
 
+    <resultMap id="memberDtoResultMap" type="com.zerobase.fastlms.dto.MemberDto">
+        <id column="user_Id" property="userId"/>
+        <result column="user_Name" property="userName"/>
+        <result column="reg_Dt" property="regDt"/>
+        <result column="udt_Dt" property="udtDt"/>
+        <result column="email_Auth_Yn" property="emailAuthYn"/>
+        <result column="email_Auth_Dt" property="emailAuthDt"/>
+        <result column="email_Auth_Key" property="emailAuthKey"/>
+        <result column="reset_Password_Key" property="resetPasswordKey"/>
+        <result column="reset_Password_Limit_Dt" property="resetPasswordLimitDt"/>
+        <result column="admin_Yn" property="adminYn"/>
+        <result column="member_Status" property="memberStatus"
+                typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result column="final_Login_Dt" property="finalLoginDt"/>
+        <result column="zipcode" property="zipcode"/>
+        <result column="addr" property="addr"/>
+        <result column="addr_Detail" property="addrDetail"/>
+    </resultMap>
+
     <sql id="selectListWhere">
         <if test="searchType != null and searchValue != null">
             <choose>
@@ -38,7 +57,7 @@
             <include refid="selectListWhere"/>
     </select>
 
-    <select id="selectList" resultType="com.zerobase.fastlms.dto.MemberDto">
+    <select id="selectList" resultMap="memberDtoResultMap">
         select *
         from member
         where 1 = 1

@@ -1,5 +1,6 @@
 package com.zerobase.fastlms.entity;
 
+import com.zerobase.fastlms.type.TakeCourseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 @Entity
-public class TakeCourse implements TakeCourseCode {
+public class TakeCourse{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,8 @@ public class TakeCourse implements TakeCourseCode {
     String userId;
     
     long payPrice;//결제금액
-    String status;//상태(수강신청, 결재완료, 수강취소)
+    @Enumerated(EnumType.STRING)
+    TakeCourseStatus status;//상태(수강신청, 결재완료, 수강취소)
     
     LocalDateTime regDt;//신청일
 }

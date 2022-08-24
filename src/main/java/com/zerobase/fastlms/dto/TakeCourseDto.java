@@ -1,6 +1,7 @@
 package com.zerobase.fastlms.dto;
 
 import com.zerobase.fastlms.entity.TakeCourse;
+import com.zerobase.fastlms.type.TakeCourseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class TakeCourseDto {
     String userId;
     
     long payPrice;//결제금액
-    String status;//상태(수강신청, 결재완료, 수강취소)
+    TakeCourseStatus status;//상태(수강신청, 결재완료, 수강취소)
     
     LocalDateTime regDt;//신청일
     

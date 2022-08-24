@@ -8,6 +8,7 @@ import com.zerobase.fastlms.model.ServiceResult;
 import com.zerobase.fastlms.model.course.TakeCourseParam;
 import com.zerobase.fastlms.service.course.CourseService;
 import com.zerobase.fastlms.service.course.TakeCourseService;
+import com.zerobase.fastlms.type.TakeCourseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ public class AdminTakeCourseController extends BaseController {
     @PostMapping("/admin/takecourse/status.do")
     public String status(Model model, TakeCourseParam parameter) {
         
-        ServiceResult result = takeCourseService.updateStatus(parameter.getId(), parameter.getStatus());
+        ServiceResult result = takeCourseService.updateStatus(parameter.getId(), TakeCourseStatus.of(parameter.getStatus()));
         if (!result.isResult()) {
             model.addAttribute("message", result.getMessage());
             return "common/error";

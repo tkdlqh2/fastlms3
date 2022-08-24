@@ -10,6 +10,7 @@ import com.zerobase.fastlms.model.ServiceResult;
 import com.zerobase.fastlms.model.course.TakeCourseInput;
 import com.zerobase.fastlms.repository.CourseRepository;
 import com.zerobase.fastlms.repository.TakeCourseRepository;
+import com.zerobase.fastlms.type.TakeCourseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -180,7 +181,7 @@ public class CourseServiceImpl implements CourseService {
         Course course = optionalCourse.get();
         
         //이미 신청정보가 있는지 확인
-        String[] statusList = {TakeCourse.STATUS_REQ, TakeCourse.STATUS_COMPLETE};
+        TakeCourseStatus[] statusList = {TakeCourseStatus.REQ, TakeCourseStatus.COMPLETE};
         long count = takeCourseRepository.countByCourseIdAndUserIdAndStatusIn(course.getId(), parameter.getUserId(), Arrays.asList(statusList));
         
         if (count > 0) {
@@ -194,7 +195,7 @@ public class CourseServiceImpl implements CourseService {
                 .userId(parameter.getUserId())
                 .payPrice(course.getSalePrice())
                 .regDt(LocalDateTime.now())
-                .status(TakeCourse.STATUS_REQ)
+                .status(TakeCourseStatus.REQ)
                 .build();
         takeCourseRepository.save(takeCourse);
         
