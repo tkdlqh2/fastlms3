@@ -1,11 +1,11 @@
-package com.zerobase.fastlms.service.course;
+package com.zerobase.fastlms.service.takecourse;
 
 import com.zerobase.fastlms.dto.TakeCourseDto;
 import com.zerobase.fastlms.entity.TakeCourse;
 import com.zerobase.fastlms.mapper.TakeCourseMapper;
 import com.zerobase.fastlms.repository.TakeCourseRepository;
 import com.zerobase.fastlms.model.ServiceResult;
-import com.zerobase.fastlms.model.course.TakeCourseParam;
+import com.zerobase.fastlms.model.takecourse.TakeCourseParam;
 import com.zerobase.fastlms.type.TakeCourseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

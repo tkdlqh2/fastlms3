@@ -7,7 +7,7 @@ import com.zerobase.fastlms.mapper.CourseMapper;
 import com.zerobase.fastlms.model.course.CourseInput;
 import com.zerobase.fastlms.model.course.CourseParam;
 import com.zerobase.fastlms.model.ServiceResult;
-import com.zerobase.fastlms.model.course.TakeCourseInput;
+import com.zerobase.fastlms.model.takecourse.TakeCourseInput;
 import com.zerobase.fastlms.repository.CourseRepository;
 import com.zerobase.fastlms.repository.TakeCourseRepository;
 import com.zerobase.fastlms.type.TakeCourseStatus;

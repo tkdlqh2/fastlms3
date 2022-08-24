@@ -1,4 +1,4 @@
-package com.zerobase.fastlms.model.course;
+package com.zerobase.fastlms.model.takecourse;
 
 import com.zerobase.fastlms.model.CommonParam;
 import lombok.Data;
