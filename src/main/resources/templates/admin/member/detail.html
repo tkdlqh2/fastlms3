@@ -12,6 +12,22 @@
             border:solid 1px #000;
         }
 
+        .log{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .log table{
+            width:100%;
+            border-collapse: collapse;
+        }
+        .log detail table th, .log table td {
+            border:solid 1px #000;
+        }
+        p.nothing {
+            text-align: center;
+            padding: 100px;
+        }
+
     </style>
 </head>
 <body>
@@ -63,7 +79,7 @@
                     <th>회원 상태</th>
                     <td>
                         <p>
-                            현재상태: <span th:text="${member.memberStatus.getDescription()}"></span>
+                            현재상태: <span th:text="${member.memberStatus}"></span>
                         </p>
                         <div>
                             <form method="post" action="/admin/member/status.do">
@@ -92,13 +108,33 @@
                     </td>
                 </tr>
 
-
             </tbody>
         </table>
 
+        <div class="log">
+            <table>
+                <tr>
+                    <th>NO</th>
+                    <th>로그인 일자</th>
+                    <th>접속 IP</th>
+                    <th>접속 UserAgent</th>
+                </tr>
+                <tr th:if="${#lists.size(logs) < 1}">
+                    <td colspan="4" >
+                        <p class="nothing">로그인 기록이 없습니다.</p>
+                    </td>
+                </tr>
+                <tr th:each="x:${logs}">
+                    <th><span th:text="${x.seq}"></span></th>
+                    <th><p th:text="${x.time}"></p></th>
+                    <th><p th:text="${x.ip}"></p></th>
+                    <th><p th:text="${x.userAgent}"></p></th>
+                </tr>
+            </table>
+        </div>
+
         <div>
             <a href="list.do"> 목록 </a>
-
         </div>
 
 

@@ -1,14 +1,11 @@
 package com.zerobase.fastlms.entity;
 
-import com.zerobase.fastlms.type.MemberStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
@@ -17,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 @Entity
-public class Member {
+public class Member implements MemberCode{
     
     @Id
     private String userId;
@@ -35,10 +32,9 @@ public class Member {
     private LocalDateTime resetPasswordLimitDt;
     
     private boolean adminYn;
-    private LocalDateTime finalLoginDateTime;
+    private LocalDateTime finalLoginDt;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus memberStatus;//이용가능한상태, 정지상태
+    private String memberStatus;//이용가능한상태, 정지상태
     
     private String zipcode;
     private String addr;

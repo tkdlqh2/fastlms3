@@ -2,9 +2,11 @@ package com.zerobase.fastlms.controller.admin;
 
 
 import com.zerobase.fastlms.controller.BaseController;
+import com.zerobase.fastlms.dto.LogDto;
 import com.zerobase.fastlms.dto.MemberDto;
 import com.zerobase.fastlms.model.member.MemberParam;
 import com.zerobase.fastlms.model.member.AdminMemberInput;
+import com.zerobase.fastlms.service.log.LogService;
 import com.zerobase.fastlms.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import java.util.List;
 public class AdminMemberController extends BaseController {
     
     private final MemberService memberService;
+    private final LogService logService;
     
     @GetMapping("/admin/member/list.do")
     public String list(Model model, MemberParam parameter) {
@@ -46,9 +49,10 @@ public class AdminMemberController extends BaseController {
         parameter.init();
         
         MemberDto member = memberService.detail(parameter.getUserId());
-        System.out.println(member.getUserName());
-        System.out.println(member.getMemberStatus() == null);
+        List<LogDto> logs = logService.listLogOfUser(parameter.getUserId());
+
         model.addAttribute("member", member);
+        model.addAttribute("logs",logs);
        
         return "admin/member/detail";
     }
