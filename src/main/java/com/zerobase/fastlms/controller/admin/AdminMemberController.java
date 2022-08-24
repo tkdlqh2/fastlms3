@@ -8,6 +8,7 @@ import com.zerobase.fastlms.model.member.MemberParam;
 import com.zerobase.fastlms.model.member.AdminMemberInput;
 import com.zerobase.fastlms.service.log.LogService;
 import com.zerobase.fastlms.service.member.MemberService;
+import com.zerobase.fastlms.type.MemberStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,9 +60,8 @@ public class AdminMemberController extends BaseController {
     
     @PostMapping("/admin/member/status.do")
     public String status(Model model, AdminMemberInput parameter) {
-    
-        
-        boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getMemberStatus());
+
+        boolean result = memberService.updateStatus(parameter.getUserId(), MemberStatus.of(parameter.getMemberStatus()));
         
         return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
     }
